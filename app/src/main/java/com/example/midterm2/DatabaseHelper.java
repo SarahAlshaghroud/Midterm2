@@ -13,7 +13,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL1 = "ID";
     public static final String COL2 = "NAME";
     public static final String COL3 = "EMAIL";
-    public static final String COL4 = "PHONE";
+    public static final String COL4 = "NATIONALID";
 
 
     /* Constructor */
