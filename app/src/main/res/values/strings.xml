@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Midterm2</string>
+    <string-array name="cities">
+        <item>Paris</item>
+        <item>Riyadh</item>
+        <item>Jeddah</item>
+    </string-array>
+</resources>
