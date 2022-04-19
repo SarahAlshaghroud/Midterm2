@@ -13,60 +13,51 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity3 extends AppCompatActivity {
-    DatabaseHelper myDB;
-    String id;
+    DatabaseHelper db;
+    int count = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
-        Button fData=(Button) findViewById(R.id.fetchBtn);
-        Button delete=(Button) findViewById(R.id.Delbtn);
-        EditText valID=(EditText) findViewById(R.id.editTextTextPersonName) ;
-        fData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Cursor cur = myDB.ViewData();
-                StringBuffer buffer = new StringBuffer();
-
-                while (cur.moveToNext()){
-
-                    buffer.append("ID: "+ cur.getString(0) + "\n");
-                    buffer.append("Name: "+ cur.getString(1) + "\n");
-                    buffer.append("Surname: "+ cur.getString(2) + "\n\n");
-                    buffer.append("National ID: "+ cur.getString(3) + "\n\n");
-                }
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity3.this);
-                builder.setCancelable(true);
-                builder.setTitle("All Data");
-                builder.setMessage(buffer.toString());
-                builder.show();
-
-                Toast.makeText(MainActivity3.this, "Successful View", Toast.LENGTH_LONG).show();
-
-            }
-        });
+        Button delete = (Button) findViewById(R.id.bttnDelete);
+        Button view = (Button) findViewById(R.id.buttonView);
+        EditText id_val = (EditText) findViewById(R.id.editTextId);
+        Button bttnfirstAct1 = (Button) findViewById(R.id.bttnact1);
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                id = valID.getText().toString();
-                myDB.DeleteEmployees(id);
+                String user_id = id_val.getText().toString();
+                db.delete(user_id);
 
                 Toast.makeText(MainActivity3.this, "Successful Delete", Toast.LENGTH_LONG).show();
-
             }
         });
 
-        Button prev=(Button) findViewById(R.id.back);
-
-        prev.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                try {
+                    db.getListContents();
+                    Toast.makeText(MainActivity3.this, "Successful View", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    count = 1;
+                    Toast.makeText(MainActivity3.this, "Unsuccessful View please insert id", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        });
+
+        bttnfirstAct1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity3.this, MainActivity2.class));
             }
         });
+
+
     }
 }
