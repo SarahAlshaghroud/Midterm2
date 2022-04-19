@@ -20,7 +20,7 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        TextView id = (TextView) findViewById(R.id.id); //pid
+        TextView id1 = (TextView) findViewById(R.id.id); //pid
 
         EditText name1 = (EditText) findViewById(R.id.name);
 
@@ -35,6 +35,7 @@ public class MainActivity2 extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String id = id1.getText().toString();
                 String name = name1.getText().toString();
                 String surname = surname1.getText().toString();
                 String NaID = NaID1.getText().toString();
@@ -42,7 +43,7 @@ public class MainActivity2 extends AppCompatActivity {
                 if (name.equals("") || surname.equals("") || NaID.equals(""))
                     Toast.makeText(MainActivity2.this, "make sure all filed are filled",
                             Toast.LENGTH_SHORT).show();
-                else if (!myDB.addData(name, surname, NaID))
+                else if (!myDB.addData(id,name, surname, NaID))
                     Toast.makeText(MainActivity2.this, "Insertion Failed",
                             Toast.LENGTH_SHORT).show();
                 else
